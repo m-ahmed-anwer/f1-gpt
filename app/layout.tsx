@@ -43,7 +43,7 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange>
-          <Toaster position="top-right" />
+          <Toaster position="top-center" />
           {children}
         </ThemeProvider>
       </body>
