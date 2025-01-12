@@ -59,6 +59,7 @@ export const handleLogin = async (
 
     return { status: "success" };
   } catch (error) {
+    console.error("Failed to login", error);
     return { status: "failed" };
   }
 };
@@ -113,6 +114,7 @@ export const handleSignup = async (
 
     return { status: "success" };
   } catch (error) {
+    console.error("Failed to create user", error);
     return { status: "failed" };
   }
 };

@@ -22,11 +22,7 @@ export function Chat() {
       <div className="flex flex-col min-w-0 h-dvh bg-background">
         <ChatHeader />
 
-        <Messages
-          messages={messages}
-          setMessages={setMessages}
-          isLoading={isLoading}
-        />
+        <Messages messages={messages} isLoading={isLoading} />
 
         <form className="flex mx-auto px-4 bg-background pb-4 md:pb-6 gap-2 w-full md:max-w-3xl">
           <PureMultimodalInput
@@ -35,7 +31,6 @@ export function Chat() {
             isLoading={isLoading}
             stop={stop}
             messages={messages}
-            setMessages={setMessages}
             input={input}
             append={append}
           />

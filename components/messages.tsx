@@ -7,12 +7,9 @@ import PreviewMessage from "./preview-message";
 interface MessagesProps {
   isLoading: boolean;
   messages: Array<Message>;
-  setMessages: (
-    messages: Message[] | ((messages: Message[]) => Message[])
-  ) => void;
 }
 
-export function Messages({ isLoading, messages, setMessages }: MessagesProps) {
+export function Messages({ isLoading, messages }: MessagesProps) {
   const [messagesContainerRef, messagesEndRef] =
     useScrollToBottom<HTMLDivElement>();
 

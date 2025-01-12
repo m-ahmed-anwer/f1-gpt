@@ -23,7 +23,6 @@ export function PureMultimodalInput({
   stop,
   isLoading,
   messages,
-  setMessages,
   handleSubmit,
   className,
   append,
@@ -33,7 +32,6 @@ export function PureMultimodalInput({
   stop: () => void;
   isLoading: boolean;
   messages: Array<Message>;
-  setMessages: Dispatch<SetStateAction<Array<Message>>>;
   handleSubmit: (event?: { preventDefault?: () => void }) => void;
   className?: string;
   append: (
