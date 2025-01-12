@@ -26,7 +26,6 @@ export function PureMultimodalInput({
   stop: () => void;
   isLoading: boolean;
   messages: Array<Message>;
-
   handleSubmit: (event?: { preventDefault?: () => void }) => void;
   className?: string;
   append: (

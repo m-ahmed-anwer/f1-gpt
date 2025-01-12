@@ -14,12 +14,17 @@ export function Chat() {
     isLoading,
     stop,
     append,
+    setMessages,
   } = useChat();
 
   return (
     <>
       <div className="flex flex-col min-w-0 h-dvh bg-background">
-        <ChatHeader />
+        <ChatHeader
+          setMessages={setMessages}
+          isLoading={isLoading}
+          stop={stop}
+        />
 
         <Messages messages={messages} isLoading={isLoading} />
 

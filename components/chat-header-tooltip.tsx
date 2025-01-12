@@ -8,10 +8,19 @@ import {
 
 import { PlusIcon } from "lucide-react";
 import { ModeToggle } from "./theme-button";
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { Button } from "@/components/ui/button";
+import { Message } from "ai";
 
-function HeaderTooltip() {
+function HeaderTooltip({
+  setMessages,
+  stop,
+  isLoading,
+}: {
+  setMessages: Dispatch<SetStateAction<Array<Message>>>;
+  stop: () => void;
+  isLoading: boolean;
+}) {
   return (
     <TooltipProvider>
       <Tooltip>
@@ -23,12 +32,18 @@ function HeaderTooltip() {
       <Tooltip>
         <TooltipTrigger asChild>
           <div className="mr-auto">
-            <a href="/">
-              <Button variant="outline" className="order-2 px-4 ">
-                <PlusIcon />
-                <span className="max-md:sr-only">New Chat</span>
-              </Button>
-            </a>
+            <Button
+              variant="outline"
+              className="order-2 px-4 "
+              onClick={() => {
+                if (isLoading) {
+                  stop();
+                }
+                setMessages([]);
+              }}>
+              <PlusIcon />
+              <span className="max-md:sr-only">New Chat</span>
+            </Button>
           </div>
         </TooltipTrigger>
         <TooltipContent>New Chat</TooltipContent>
