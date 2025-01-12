@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { useLocalStorage, useWindowSize } from "usehooks-ts";
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
-import { ArrowUpIcon, StopCircleIcon } from "lucide-react";
+import { ArrowUpIcon, SquareIcon } from "lucide-react";
 import SuggestedActions from "./suggested-props";
 import { ChatRequestOptions, CreateMessage, Message } from "ai";
 
@@ -139,7 +139,7 @@ function StopButton({ stop }: { stop: () => void }) {
         event.preventDefault();
         stop();
       }}>
-      <StopCircleIcon size={14} />
+      <SquareIcon size={5} className="fill-white text-white p-0.5" />
     </Button>
   );
 }
