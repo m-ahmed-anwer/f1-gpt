@@ -24,12 +24,7 @@ export function Messages({ isLoading, messages, setMessages }: MessagesProps) {
 
       {/* Preview Message */}
       {messages.map((message, index) => (
-        <PreviewMessage
-          key={message.id}
-          message={message}
-          isLoading={isLoading && messages.length - 1 === index}
-          setMessages={setMessages}
-        />
+        <PreviewMessage key={message.id} message={message} />
       ))}
 
       {isLoading &&

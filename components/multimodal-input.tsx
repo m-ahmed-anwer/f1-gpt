@@ -129,7 +129,7 @@ export function PureMultimodalInput({
 
       <div className="absolute bottom-0 right-0 p-2 w-fit flex flex-row justify-end">
         {isLoading ? (
-          <StopButton stop={stop} setMessages={setMessages} />
+          <StopButton stop={stop} />
         ) : (
           <SendButton input={input} submitForm={submitForm} />
         )}
@@ -138,20 +138,13 @@ export function PureMultimodalInput({
   );
 }
 
-function StopButton({
-  stop,
-  setMessages,
-}: {
-  stop: () => void;
-  setMessages: Dispatch<SetStateAction<Array<Message>>>;
-}) {
+function StopButton({ stop }: { stop: () => void }) {
   return (
     <Button
       className="rounded-full p-1.5 h-fit border dark:border-zinc-600"
       onClick={(event) => {
         event.preventDefault();
         stop();
-        // setMessages(() => console.log("hi"));
       }}>
       <StopCircleIcon size={14} />
     </Button>

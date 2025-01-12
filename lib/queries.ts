@@ -33,7 +33,7 @@ export async function createUser(
       },
     });
 
-    const { password: newUserPassword, ...rest } = newUser;
+    const { ...rest } = newUser;
     return { ...rest };
   } catch (error) {
     console.error("Failed to create user in database");

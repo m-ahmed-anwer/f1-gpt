@@ -1,4 +1,3 @@
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 import type { NextAuthConfig } from "next-auth";
 

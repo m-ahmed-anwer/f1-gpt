@@ -1,24 +1,13 @@
 import { SparklesIcon } from "lucide-react";
 import React from "react";
 
-import type { ChatRequestOptions, Message } from "ai";
-import cx from "classnames";
+import type { Message } from "ai";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 import ReactMarkdown from "react-markdown";
 
-function PreviewMessage({
-  message,
-  isLoading,
-  setMessages,
-}: {
-  message: Message;
-  isLoading: boolean;
-  setMessages: (
-    messages: Message[] | ((messages: Message[]) => Message[])
-  ) => void;
-}) {
+function PreviewMessage({ message }: { message: Message }) {
   return (
     <AnimatePresence>
       <motion.div

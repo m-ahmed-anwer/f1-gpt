@@ -28,8 +28,8 @@ const signUpSchema = z
   });
 
 export interface LoginActionState {
-  errors: {};
   status: "idle" | "in_progress" | "success" | "failed" | "invalid_data";
+  errors?: Record<string, string[]>;
 }
 
 export const handleLogin = async (
@@ -57,9 +57,9 @@ export const handleLogin = async (
       redirect: false,
     });
 
-    return { status: "success", errors: {} };
+    return { status: "success" };
   } catch (error) {
-    return { status: "failed", errors: {} };
+    return { status: "failed" };
   }
 };
 
@@ -71,7 +71,7 @@ export interface RegisterActionState {
     | "failed"
     | "user_exists"
     | "invalid_data";
-  errors: {};
+  errors?: Record<string, string[]>;
 }
 
 export const handleSignup = async (
@@ -96,7 +96,7 @@ export const handleSignup = async (
     const existingUser = await getUser(validatedData.data.email);
 
     if (existingUser) {
-      return { status: "user_exists", errors: {} };
+      return { status: "user_exists" };
     }
 
     await createUser(
@@ -111,8 +111,8 @@ export const handleSignup = async (
       redirect: false,
     });
 
-    return { status: "success", errors: {} };
+    return { status: "success" };
   } catch (error) {
-    return { status: "failed", errors: {} };
+    return { status: "failed" };
   }
 };
