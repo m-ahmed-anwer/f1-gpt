@@ -5,37 +5,41 @@ import type React from "react";
 import {
   useRef,
   useEffect,
-  useState,
-  useCallback,
   type Dispatch,
   type SetStateAction,
-  type ChangeEvent,
-  memo,
+  useCallback,
 } from "react";
 import { toast } from "sonner";
 import { useLocalStorage, useWindowSize } from "usehooks-ts";
-
-// import { sanitizeUIMessages } from "@/lib/utils";
-
-// import { ArrowUpIcon, PaperclipIcon, StopIcon } from
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
-// import { SuggestedActions } from "./suggested-actions";
-import equal from "fast-deep-equal";
 import { ArrowUpIcon, StopCircleIcon } from "lucide-react";
+import SuggestedActions from "./suggested-props";
+import { ChatRequestOptions, CreateMessage, Message } from "ai";
 
 export function PureMultimodalInput({
   input,
   setInput,
-  isLoading,
   stop,
+  isLoading,
+  messages,
+  setMessages,
+  handleSubmit,
   className,
+  append,
 }: {
   input: string;
   setInput: (value: string) => void;
-  isLoading: boolean;
   stop: () => void;
+  isLoading: boolean;
+  messages: Array<Message>;
+  setMessages: Dispatch<SetStateAction<Array<Message>>>;
+  handleSubmit: (event?: { preventDefault?: () => void }) => void;
   className?: string;
+  append: (
+    message: Message | CreateMessage,
+    chatRequestOptions?: ChatRequestOptions
+  ) => Promise<string | null | undefined>;
 }) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { width } = useWindowSize();
@@ -66,11 +70,18 @@ export function PureMultimodalInput({
     "input",
     ""
   );
+  const submitForm = useCallback(() => {
+    handleSubmit();
+    setLocalStorageInput("");
+    resetHeight();
+    if (width && width > 768) {
+      textareaRef.current?.focus();
+    }
+  }, [handleSubmit, setLocalStorageInput, width]);
 
   useEffect(() => {
     if (textareaRef.current) {
       const domValue = textareaRef.current.value;
-      // Prefer DOM value over localStorage to handle hydration
       const finalValue = domValue || localStorageInput || "";
       setInput(finalValue);
       adjustHeight();
@@ -88,15 +99,9 @@ export function PureMultimodalInput({
     adjustHeight();
   };
 
-  const submitForm = () => {};
-
   return (
     <div className="relative w-full flex flex-col gap-4">
-      {/* {messages.length === 0 &&
-        attachments.length === 0 &&
-        uploadQueue.length === 0 && (
-          <SuggestedActions append={append} chatId={chatId} />
-        )} */}
+      {messages.length === 0 && <SuggestedActions append={append} />}
 
       <Textarea
         ref={textareaRef}
@@ -109,22 +114,22 @@ export function PureMultimodalInput({
         )}
         rows={2}
         autoFocus
-        // onKeyDown={(event) => {
-        //   if (event.key === "Enter" && !event.shiftKey) {
-        //     event.preventDefault();
+        onKeyDown={(event) => {
+          if (event.key === "Enter" && !event.shiftKey) {
+            event.preventDefault();
 
-        //     if (isLoading) {
-        //       toast.error("Please wait for the model to finish its response!");
-        //     } else {
-        //       submitForm();
-        //     }
-        //   }
-        // }}
+            if (isLoading) {
+              toast.error("Please wait for the model to finish its response!");
+            } else {
+              submitForm();
+            }
+          }
+        }}
       />
 
       <div className="absolute bottom-0 right-0 p-2 w-fit flex flex-row justify-end">
         {isLoading ? (
-          <StopButton stop={stop} />
+          <StopButton stop={stop} setMessages={setMessages} />
         ) : (
           <SendButton input={input} submitForm={submitForm} />
         )}
@@ -133,23 +138,27 @@ export function PureMultimodalInput({
   );
 }
 
-function PureStopButton({ stop }: { stop: () => void }) {
+function StopButton({
+  stop,
+  setMessages,
+}: {
+  stop: () => void;
+  setMessages: Dispatch<SetStateAction<Array<Message>>>;
+}) {
   return (
     <Button
       className="rounded-full p-1.5 h-fit border dark:border-zinc-600"
       onClick={(event) => {
         event.preventDefault();
         stop();
-        //setMessages((messages) => sanitizeUIMessages(messages));
+        // setMessages(() => console.log("hi"));
       }}>
       <StopCircleIcon size={14} />
     </Button>
   );
 }
 
-const StopButton = memo(PureStopButton);
-
-function PureSendButton({
+function SendButton({
   submitForm,
   input,
 }: {
@@ -159,16 +168,9 @@ function PureSendButton({
   return (
     <Button
       className="rounded-full p-1.5 h-fit border dark:border-zinc-600"
-      onClick={(event) => {
-        event.preventDefault();
-        submitForm();
-      }}>
+      onClick={submitForm}
+      disabled={input.length === 0}>
       <ArrowUpIcon size={14} />
     </Button>
   );
 }
-
-const SendButton = memo(PureSendButton, (prevProps, nextProps) => {
-  if (prevProps.input !== nextProps.input) return false;
-  return true;
-});

@@ -1,4 +1,4 @@
-import "server-only";
+// import "server-only";
 
 import { genSaltSync, hashSync } from "bcrypt-ts";
 import { PrismaClient } from "@prisma/client";
