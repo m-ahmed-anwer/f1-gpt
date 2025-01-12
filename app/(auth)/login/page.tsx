@@ -51,7 +51,7 @@ function Login() {
         <AuthForm
           action={handleSubmit}
           defaultEmail={email}
-          errors={state.errors}
+          errors={state.errors || {}}
           mode="login">
           <SubmitButton isSuccessful={isSuccessful}>Log in</SubmitButton>
           <p className="text-center text-sm text-gray-600 mt-4 dark:text-zinc-400">

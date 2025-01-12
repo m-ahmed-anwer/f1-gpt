@@ -8,7 +8,6 @@ import { PureMultimodalInput } from "./multimodal-input";
 export function Chat() {
   const {
     messages,
-    setMessages,
     handleSubmit,
     setInput,
     input,

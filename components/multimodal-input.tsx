@@ -2,13 +2,7 @@
 
 import cx from "classnames";
 import type React from "react";
-import {
-  useRef,
-  useEffect,
-  type Dispatch,
-  type SetStateAction,
-  useCallback,
-} from "react";
+import { useRef, useEffect, useCallback } from "react";
 import { toast } from "sonner";
 import { useLocalStorage, useWindowSize } from "usehooks-ts";
 import { Button } from "./ui/button";
@@ -32,6 +26,7 @@ export function PureMultimodalInput({
   stop: () => void;
   isLoading: boolean;
   messages: Array<Message>;
+
   handleSubmit: (event?: { preventDefault?: () => void }) => void;
   className?: string;
   append: (

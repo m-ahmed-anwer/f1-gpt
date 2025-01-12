@@ -20,7 +20,7 @@ export function Messages({ isLoading, messages }: MessagesProps) {
       {messages.length === 0 && <Overview />}
 
       {/* Preview Message */}
-      {messages.map((message, index) => (
+      {messages.map((message) => (
         <PreviewMessage key={message.id} message={message} />
       ))}
 
