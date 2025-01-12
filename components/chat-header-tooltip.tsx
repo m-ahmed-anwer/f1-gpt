@@ -10,11 +10,8 @@ import { PlusIcon } from "lucide-react";
 import { ModeToggle } from "./theme-button";
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 
 function HeaderTooltip() {
-  const router = useRouter();
-
   return (
     <TooltipProvider>
       <Tooltip>
@@ -26,16 +23,12 @@ function HeaderTooltip() {
       <Tooltip>
         <TooltipTrigger asChild>
           <div className="mr-auto">
-            <Button
-              variant="outline"
-              className="order-2 px-4 "
-              onClick={() => {
-                router.push("/");
-                router.refresh();
-              }}>
-              <PlusIcon />
-              <span className="max-md:sr-only">New Chat</span>
-            </Button>
+            <a href="/">
+              <Button variant="outline" className="order-2 px-4 ">
+                <PlusIcon />
+                <span className="max-md:sr-only">New Chat</span>
+              </Button>
+            </a>
           </div>
         </TooltipTrigger>
         <TooltipContent>New Chat</TooltipContent>
