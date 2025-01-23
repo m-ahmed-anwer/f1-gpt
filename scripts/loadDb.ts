@@ -6,7 +6,10 @@ import OpenAI from "openai";
 
 type SimilarityMetric = "dot_product" | "cosine" | "euclidean";
 
-const f1Data = [
+const insertedData = [
+  "https://www.formula1.com/en/drivers",
+  "https://en.wikipedia.org/wiki/List_of_Formula_One_drivers",
+  "https://www.forbes.com/sites/brettknight/2024/12/10/formula-1s-highest-paid-drivers-2024/",
   "https://en.wikipedia.org/wiki/Formula_One",
   "https://www.formula1.com/en/latest/all",
   "https://www.skysports.com/f1/news",
@@ -14,7 +17,10 @@ const f1Data = [
   "https://www.formula1.com/en/results/2024/races",
   "https://www.formula1.com/en/results/2024/drivers",
   "https://en.wikipedia.org/wiki/List_of_Formula_One_World_Drivers%27_Champions",
+  "https://en.wikipedia.org/wiki/Lewis_Hamilton",
 ];
+
+const f1Data = ["https://en.wikipedia.org/wiki/Lewis_Hamilton"];
 
 const {
   ASTRA_DB_APPLICATION_TOKEN,
@@ -90,4 +96,4 @@ const scrapePage = async (url: string) => {
   return rawContent?.replace(/<[^>]*>?/gm, ""); // Remove HTML tags
 };
 
-createCollection().then(() => loadSampleData());
+loadSampleData();
