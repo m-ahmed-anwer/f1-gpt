@@ -15,8 +15,53 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Next js F1 chat app",
-  description: "Next.js F1 chatbot app",
+  title: "F1 GPT Chatbot - Real-time Formula 1 AI Assistant | Ahmed Anwer",
+  description:
+    "Experience the ultimate F1 chatbot powered by AI. Get real-time Formula 1 updates, race insights, and expert analysis. Built by Ahmed Anwer.",
+  keywords: [
+    "F1 Chatbot",
+    "Formula 1 AI",
+    "F1 GPT",
+    "Real-time F1 Updates",
+    "F1 Race Insights",
+    "Ahmed Anwer",
+    "Next.js Chatbot",
+    "AI Chatbot for F1",
+  ],
+  authors: [{ name: "Ahmed Anwer", url: "https://f1-gpt-sand.vercel.app/" }],
+  openGraph: {
+    title: "F1 GPT Chatbot - Real-time Formula 1 AI Assistant | Ahmed Anwer",
+    description:
+      "Experience the ultimate F1 chatbot powered by AI. Get real-time Formula 1 updates, race insights, and expert analysis. Built by Ahmed Anwer.",
+    url: "https://f1-gpt-sand.vercel.app/",
+    siteName: "F1 GPT Chatbot",
+    images: [
+      {
+        url: "https://f1-gpt-sand.vercel.app/f1.png", // Full URL to the image
+        width: 1200,
+        height: 630,
+        alt: "F1 GPT Chatbot - Real-time Formula 1 AI Assistant",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "F1 GPT Chatbot - Real-time Formula 1 AI Assistant | Ahmed Anwer",
+    description:
+      "Experience the ultimate F1 chatbot powered by AI. Get real-time Formula 1 updates, race insights, and expert analysis. Built by Ahmed Anwer.",
+    images: ["https://f1-gpt-sand.vercel.app/f1.png"],
+    creator: "@ahmed_anwer3",
+  },
+  
+  icons: {
+    icon: "/favicon.ico", // Path to your favicon
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "https://f1-gpt-sand.vercel.app/site.webmanifest", // Path to your manifest file
+  metadataBase: new URL("https://f1-gpt-sand.vercel.app/"), // Base URL for all relative URLs
 };
 
 export const viewport = {
@@ -29,13 +74,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      // `next-themes` injects an extra classname to the body element to avoid
-      // visual flicker before hydration. Hence the `suppressHydrationWarning`
-      // prop is necessary to avoid the React hydration mismatch warning.
-      // https://github.com/pacocoursey/next-themes?tab=readme-ov-file#with-app
-      suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider
