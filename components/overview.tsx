@@ -33,7 +33,7 @@ export const Overview = () => {
           Crafted with passion and innovation by{" "}
           <Link
             className="font-medium underline underline-offset-4"
-            href="https://ahmedanwer-dev.netlify.app/"
+            href="https://ahmedanwer.vercel.app/"
             target="_blank">
             Ahmed Anwer
           </Link>
